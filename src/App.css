@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+  background-color: aliceblue;
+  text-decoration-color: black;
+}
+
+.gridcontainer{
+  display:grid;
+  grid-template-columns: auto auto auto;
+  gap: 50px;
+}
+
+html,body,#root{
+  height: 100%;
+}
