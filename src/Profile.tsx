@@ -29,7 +29,7 @@ export default function Profile(){
              <Typography variant="h5">{context?.uid}</Typography>
              <div className={style.buttoncontainer}>
                 <Fab color="secondary" variant="extended" onClick={onSignOut}>Sign Out</Fab>
-                <Fab color="primary" variant="extended" onClick={()=>history("/")}>Home</Fab>
+                <Fab color="primary" variant="extended" onClick={()=>history("/Home")}>Home</Fab>
             </div>
           </div>
         </div>

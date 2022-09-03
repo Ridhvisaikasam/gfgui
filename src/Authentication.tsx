@@ -9,13 +9,16 @@ const useStyles=makeStyles({
     container:{ width: '50%',display:'flex',gap:'10px',flexDirection:'column'},
     buttons:{display:'flex',gap:'10px',justifyContent:'flex-end'},
     title:{display:'flex',justifyContent:'center'},
+    message:{display:'flex',justifyContent:'center',color:'blue'},
     errorMessage:{color:'red'}
 })
 
 interface IAuthenticationProps{
         title: string,
+        message:string,
         showSignUpButton?:boolean,
         showLogInButton?:boolean,
+        showHomeButton?:boolean,
         showName?:boolean,
         onSubmitClick:(email:string,password:string,displayName?:string)=>Promise<string>,
 }
@@ -46,6 +49,11 @@ export default function Authentication(props:IAuthenticationProps){
         <div className={style.parentcontainer}>
         <form className={style.container}>
            <Typography variant="h3" className={style.title}>{props.title}</Typography>
+           <div className={style.buttons}>
+           <Typography variant="h5" className={style.message}>{props.message}</Typography>
+                {props.showSignUpButton&&<Fab variant="extended" onClick={()=>history("/SignUp")}>Sign Up Page</Fab>}
+                {props.showLogInButton&&<Fab variant="extended" onClick={()=>history("/LogIn")}>Log In Page</Fab>}
+           </div>
            {props.showName&&<TextField variant="outlined" placeholder="name" type="name" 
                  {
                     ...register("name",  
@@ -76,9 +84,7 @@ export default function Authentication(props:IAuthenticationProps){
             <div className={style.buttons}>
                 <Fab color="primary" variant="extended" onClick={handleSubmit(onClickSubmit)}>Submit</Fab>
                 <Fab color="secondary" variant="extended" onClick={()=>reset()}>Reset</Fab>
-                <Fab variant="extended" onClick={()=>history("/")}>Home</Fab>
-                {props.showSignUpButton&&<Fab variant="extended" onClick={()=>history("/SignUp")}>Sign Up</Fab>}
-                {props.showLogInButton&&<Fab variant="extended" onClick={()=>history("/LogIn")}>Log In</Fab>}
+                {props.showHomeButton&&<Fab variant="extended" onClick={()=>history("/")}>Home</Fab>}
             </div>
             {loadingSpinner && <LoadingSpinner showBackDrop={true}/>}
             {errorMessage && <Typography variant="h5" id="errorMessage" className={style.errorMessage}>{errorMessage}</Typography>}

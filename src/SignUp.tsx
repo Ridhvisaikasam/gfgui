@@ -19,6 +19,6 @@ export default function SignUp(){
     }
 
     return(
-        <Authentication title="SignUp Page" showSignUpButton={false} showLogInButton={true} showName={true} onSubmitClick={onSubmitClick}/>
+        <Authentication title="SignUp Page" message="if old user -> go to login page" showHomeButton={false} showSignUpButton={false} showLogInButton={true} showName={true} onSubmitClick={onSubmitClick}/>
     );
 }

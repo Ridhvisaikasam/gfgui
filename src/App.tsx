@@ -58,7 +58,7 @@ export default function App() {
            <Route path="/LogIn" element={<LogIn />} />
            <Route path="/Profile" element={<Profile />} />
            <Route path="/Home" element={<Home />} />
-           <Route path="/" element={<Home />} />
+           <Route path="/" element={<LogIn />} />
 
 
 
