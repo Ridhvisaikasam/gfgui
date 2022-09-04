@@ -12,7 +12,7 @@ const useStyle=makeStyles({
 });
 
 interface IFile{
-    restaurant:IHotel,
+    data:{hotelsx:IHotel[]};
 }
 
 export default function Home(){
@@ -25,9 +25,25 @@ export default function Home(){
     const select=useSelector((x:AppState)=>x.HotelReducer);
     const apiv=()=>{
         async function api(){
-            const response=await fetch("/hotel.json");
-            const json: IFile[]=await response.json(); 
-            dispatch(completed(json.map(x=>x.restaurant)));
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            const graphql = JSON.stringify({
+            query: "{\n  hotelsx{\n    id\n    name\n    cuisines\n    featured_image\n  }\n}",
+            variables: {}
+             })
+            const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: graphql,
+            };
+
+            const response=await fetch("https://shielded-island-97146.herokuapp.com/graphql", requestOptions);
+
+            //const response=await fetch("/hotel.json");  --> call for static file done without backend
+            const json: IFile=await response.json(); 
+            dispatch(completed(json.data.hotelsx));
      }
      dispatch(started());
      api();
